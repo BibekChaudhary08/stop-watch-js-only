@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="Quiz_Box">
+        <h2 id="queBox">This is dummy question</h2>
+        <input type="radio" id="option1" class="option" value="a" name="opt">
+        <label id="option1">Option 1</label> 
+        
+        <input type="radio" id="option2" class="option" value="b" name="opt">
+        <label id="option2">Option 2</label>
+
+        <input type="radio" id="option3" class="option" value="c" name="opt">
+        <label id="option3">Option 3</label> 
+        
+        <input type="radio" id="option4" class="option" value="d" name="opt">
+        <label id="option4">Option 4</label> <br>
+    
+    <button id="btn" onclick="checkAnswer()">Submit</button>
+
+    </div>
+    </div>
+
+    <script>
+        const questions = [{
+
+             'que': "who is father of computer ?",
+             'a': "sanjog",
+             'b': "nishant",
+             'c': "ritesh",
+             'd': "sudip",
+             'correct': "a"
+        },
+
+        {
+              'que': "who is gay ?",
+              'a': "Nishant",
+              'b': "Arun",
+              'c': "Sanjog",
+              'd': "None of above",
+              'correct': "b"
+        },
+
+        {
+              'que': "who is bodybuilder of KCT ?",
+              'a': "Prajwal",
+              'b': "Ritesh",
+              'c': "Sanchar",
+              'd': "Umesh",
+              'correct': "b"
+        },
+
+        {
+              'que': "who is Founder of KCT ?",
+              'a': "Nishant",
+              'b': "Arun",
+              'c': "Sanjog",
+              'd': "None of above",
+              'correct': "b"
+        },
+
+        {
+              'que': "who is the sexy boy of KCT ?",
+              'a': "Nishant",
+              'b': "Arun",
+              'c': "Sanjog",
+              'd': "Ritesh",
+              'correct': "b"
+        },
+
+        {
+              'que': "who is playboy of KCT ?",
+              'a': "Nishant",
+              'b': "Arun",
+              'c': "Sanjog",
+              'd': "Ishan",
+              'correct': "d"
+        },
+
+        {
+              'que': "who is chandal boy of KCT ?",
+              'a': "Nishant",
+              'b': "Arun",
+              'c': "Sanjog",
+              'd': "Sudip",
+              'correct': "b"
+        },
+
+        {
+              'que': "who is bsdk of KCT ?",
+              'a': "Nishant",
+              'b': "Arun",
+              'c': "Sanjog",
+              'd': "Sakar",
+              'correct': "b"
+        },
+        
+        {
+               'que' : "which is markup language ?",
+               'a' : "Html",
+               'b': "CSS",
+               'c': "Javascript",
+               'd': "PHP",
+               'correct': "a",
+        }
+    ];
+
+    let queBox = document.getElementById('queBox');
+    let option = document.querySelectorAll('.option');
+    let index = 0;
+    let total = questions.length;
+    let right = 0;
+    let wrong = 0;
+
+    const loadQuestions = () => {
+        if(index === total){
+            return endQuiz();
+        }
+        reset();
+         const data = questions[index];
+        // console.log(data);
+         queBox.innerHTML = `${index + 1}) ${data.que}`;
+         option[0].nextElementSibling.innerText = data.a;
+         option[1].nextElementSibling.innerText = data.b;
+         option[2].nextElementSibling.innerText = data.c;
+         option[3].nextElementSibling.innerText = data.d;
+    }
+
+    const checkAnswer = () => {
+        const data = questions[index];
+        const ans = getAnswer();
+        if(ans === data.correct){
+            right++;
+        }
+        else{
+            wrong++;
+        }
+        index++;
+        loadQuestions();
+        return;
+    }
+
+    const  getAnswer = ()=>{
+        let answer;
+        option.forEach((input)=>{
+            if(input.checked){
+                answer = input.value;
+            }
+        })
+        return answer;
+    } 
+
+    const reset = () => {
+        option.forEach((input) =>{
+            input.checked = false;
+        })
+    }
+
+    const endQuiz = () => {
+        document.getElementById('Quiz_Box').innerHTML = `<h3> Thank You For Playing This Quiz Game</h3>
+                                                         <h3>${right}/${total} are correct</h3>`
+    }
+    
+    loadQuestions();
+             
+    </script>
+</body>
+</html>
